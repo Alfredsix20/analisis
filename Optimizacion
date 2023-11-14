@@ -1,0 +1,26 @@
+def create_graph(obstacles):
+  """
+  Crea un grafo que representa el almacén.
+
+  Args:
+    obstacles: Una lista de nodos que representan obstáculos.
+
+  Returns:
+    Un grafo de Python.
+  """
+
+  graph = nx.Graph()
+  for i in range(5):
+    for j in range(5):
+      node = (i, j)
+      if node not in obstacles:
+        graph.add_node(node)
+        if i > 0:
+          graph.add_edge((i, j), (i - 1, j), weight=1)
+        if i < 4:
+          graph.add_edge((i, j), (i + 1, j), weight=1)
+        if j > 0:
+          graph.add_edge((i, j), (i, j - 1), weight=1)
+        if j < 4:
+          graph.add_edge((i, j), (i, j + 1), weight=1)
+  return graph
